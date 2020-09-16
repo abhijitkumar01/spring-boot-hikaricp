@@ -1,3 +1,19 @@
+### exclude maven target
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### exclude maven files
+mvnw*
+Help.md
+
+### exclude IntelliJ IDEA files
+.idea
+*.iws
+*.iml
+*.ipr
+
 # Compiled class file
 *.class
 
