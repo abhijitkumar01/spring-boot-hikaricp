@@ -1,4 +1,4 @@
-package com.example.springboot.ddl;
+package com.example.springboot.model;
 
 import javax.persistence.*;
 import javax.xml.bind.*;
@@ -21,10 +21,7 @@ public class Trailer {
 
   public Trailer(String name) throws NoSuchAlgorithmException {
     this.name = name;
-    MessageDigest md = MessageDigest.getInstance("MD5");
-    md.update(name.getBytes());
-    byte[] digest = md.digest();
-    this.nameMD5 = DatatypeConverter.printHexBinary(digest).toUpperCase();
+    setNameMd5();
   }
 
   public long getId() { return id; }
@@ -35,6 +32,11 @@ public class Trailer {
 
   public String getNameMD5() {
     return nameMD5;
+  }
+
+  public void setName(String name) throws NoSuchAlgorithmException {
+    this.name = name;
+    setNameMd5();
   }
 
   @Override
@@ -59,5 +61,12 @@ public class Trailer {
             ", name='" + name + '\'' +
             ", nameMD5='" + nameMD5 + '\'' +
             '}';
+  }
+
+  public void setNameMd5() throws NoSuchAlgorithmException {
+    MessageDigest md = MessageDigest.getInstance("MD5");
+    md.update(this.name.getBytes());
+    byte[] digest = md.digest();
+    this.nameMD5 = DatatypeConverter.printHexBinary(digest).toUpperCase();
   }
 }

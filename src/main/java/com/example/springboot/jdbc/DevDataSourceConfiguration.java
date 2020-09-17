@@ -6,7 +6,7 @@ import org.springframework.context.annotation.*;
 import javax.sql.*;
 
 @Configuration
-@Profile({"dev"})
+@Profile({"dev", "default"})
 public class DevDataSourceConfiguration {
   private static final String SQL_CONNECTION_NAME =
           System.getenv("SQL_JDBC_URL");

@@ -1,6 +1,6 @@
-package com.example.springboot.jdbc;
+package com.example.springboot.jdbc.repository;
 
-import com.example.springboot.ddl.*;
+import com.example.springboot.model.*;
 import org.springframework.data.repository.*;
 
 import java.util.*;

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.*;
 import javax.sql.*;
 
 @Configuration
-@Profile({"gcp", "default"})
+@Profile({"gcp"})
 public class GCPDataSourceConfiguration {
   private static final String CLOUD_SQL_CONNECTION_NAME =
           System.getenv("CLOUD_SQL_CONNECTION_NAME");
