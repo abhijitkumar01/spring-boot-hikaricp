@@ -1,7 +1,7 @@
 package com.example.springboot.controller;
 
-import com.example.springboot.ddl.*;
-import com.example.springboot.jdbc.*;
+import com.example.springboot.model.*;
+import com.example.springboot.jdbc.repository.*;
 import org.apache.logging.log4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
@@ -35,6 +35,23 @@ public class TrailerController {
       logger.error("trailer with id: " + id + " not found");
     }
     return trailers;
+  }
+
+  @PutMapping("/trailers/trailer/{id}")
+  public ResponseEntity<Object> updateTrailer(@PathVariable long id,
+                                              @RequestBody Trailer trailer) throws NoSuchAlgorithmException {
+    logger.info("update trailer: " + id);
+    Optional<Trailer> obj = repository.findById(id);
+    if (obj.isPresent()) {
+      Trailer updatedTrailer = obj.get();
+      updatedTrailer.setName(trailer.getName());
+      repository.save(updatedTrailer);
+      logger.info("updated trailer " + id);
+      return new ResponseEntity<>(HttpStatus.OK);
+    } else {
+      logger.info("trailer does not exist");
+      return new ResponseEntity<>("trailer not found", HttpStatus.NOT_FOUND);
+    }
   }
 
   @DeleteMapping("/trailers/trailer/{id}")
